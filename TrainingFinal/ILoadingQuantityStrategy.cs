@@ -8,5 +8,9 @@ namespace TrainingFinal
 {
     interface ILoadingQuantityStrategy
     {
+        ILoadingSelfProvideStrategy SelfProvideStrategy { get; set; }
+        List<IElement> ElementList { get; set; }
+
+        ILoadingSequence ResolveLoadingSequence(List<IElement> elements);
     }
 }

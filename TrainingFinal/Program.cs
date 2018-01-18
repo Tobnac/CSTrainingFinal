@@ -18,6 +18,21 @@ namespace TrainingFinal
             // optional modules:
             // - random tree generator
             // -> instead of code string + parser
+
+            // ToDo:
+
+            // basics:
+            // - parser
+            // - element
+            // - resource
+            // - loadingSequence -> required elements
+            // - selfProvideStrategy -> requires basics
+            // - quantityStrategy -> requires selfProvideStrategy
+            // - SequenceVisualizer 
+            // - loadingProcessor (init, selection of strategies, ...)
+            // main Program class -> requires everything
+            // optional:
+            // - randomTreeGenerator
         }
     }
 }
