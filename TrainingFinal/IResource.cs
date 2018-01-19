@@ -9,7 +9,5 @@ namespace TrainingFinal
     interface IResource
     {
         string ResourceName { get; set; }
-
-
     }
 }

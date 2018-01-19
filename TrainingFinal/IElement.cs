@@ -8,15 +8,11 @@ namespace TrainingFinal
 {
     interface IElement
     {
-        // element required resource X but also provides it, meaning it can self-provide
-        bool IsSelfproviding();
-
+        string Name { get; set; }
         // list of resources that this Element required to be loaded (and thus provide it's own resources)
-        List<IResource> GetRequirements();
-
+        List<IResource> Requirements { get; set; }
         // list of resources that this Element provides
-        List<IResource> GetProvision();
-
+        List<IResource> Provisions { get; set; }
 
     }
 }

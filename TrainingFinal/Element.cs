@@ -8,19 +8,37 @@ namespace TrainingFinal
 {
     class Element : IElement
     {
-        public List<IResource> GetProvision()
+        public string Name { get; set; }
+        public List<IResource> Requirements { get; set; }
+        public List<IResource> Provisions { get; set; }
+
+        public Element()
         {
-            throw new NotImplementedException();
+
         }
 
-        public List<IResource> GetRequirements()
+        public Element(string name)
         {
-            throw new NotImplementedException();
+            this.Name = name;
         }
 
-        public bool IsSelfproviding()
+        public Element(string name, List<IResource> requirements, List<IResource> provisions)
         {
-            throw new NotImplementedException();
+            this.Name = name;
+            this.Requirements = requirements;
+            this.Provisions = provisions;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Element)) return false;
+            var temp = obj as Element;
+            return
+                (
+                    this.Name.Equals(temp.Name) &&
+                    this.Requirements.Equals(temp.Requirements) &&
+                    this.Provisions.Equals(temp.Provisions)
+                );
         }
     }
 }
