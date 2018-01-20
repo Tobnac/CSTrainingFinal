@@ -8,6 +8,16 @@ namespace TrainingFinal
 {
     class LoadingSequence : ILoadingSequence
     {
-        public List<List<IElement>> Sequence { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public List<List<IElement>> Sequence { get; set; } = new List<List<IElement>>();
+
+        public void AddLoadingStep(List<IElement> elements)
+        {
+            this.Sequence.Add(elements);
+        }
+
+        public void AddLoadingStep(IElement element)
+        {
+            this.AddLoadingStep(new List<IElement>() { element });
+        }
     }
 }

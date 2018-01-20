@@ -12,6 +12,9 @@ namespace TrainingFinal
         // every index can load multiple elements simultaniously
         List<List<IElement>> Sequence { get; set; }
 
+        void AddLoadingStep(List<IElement> elements);
+        void AddLoadingStep(IElement element);
+
         // Sequence.Length
     }
 }

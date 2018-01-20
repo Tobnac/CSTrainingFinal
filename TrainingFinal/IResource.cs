@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrainingFinal
 {
-    interface IResource
+    public interface IResource
     {
         string ResourceName { get; set; }
     }
