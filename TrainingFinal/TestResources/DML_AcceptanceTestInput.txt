@@ -22,7 +22,8 @@ Takes(B);}
 NN{Gives(F);Takes(R);}
 AFEF
 {
-Takes(A,B,X,Y,R);
+Takes(A,B);
+Takes(A,X,Y,R);
 }
 XA
 {

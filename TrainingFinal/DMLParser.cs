@@ -11,7 +11,9 @@ namespace TrainingFinal
     {
         public List<IElement> Parse(string code)
         {
-            throw new NotImplementedException();
+            var result = new List<IElement>();
+
+            return result;
         }
     }
 
@@ -21,33 +23,49 @@ namespace TrainingFinal
         private static string acceptanceStringInput = System.IO.File.ReadAllText(@"D:\TobiTutorialC\TrainingFinal\TestResources\DML_AcceptanceTestInput.txt");
         private static List<IElement> acceptanceResult = new List<IElement>()
         {
-            new Element("AS", ConvertResource("X", "B"), ConvertResource("Y")),
-            new Element("GB", ConvertResource("X", "Y", "D"), ConvertResource("R")),
-            new Element("M5", ConvertResource("B"), ConvertResource("R")),
-            new Element("MR", ConvertResource(), ConvertResource("A","B")),
-            new Element("M2", ConvertResource("B"), ConvertResource("X")),
-            new Element("NN", ConvertResource("R"), ConvertResource("F")),
-            new Element("AFEF", ConvertResource("A", "B","X","Y","R"), ConvertResource()),
-            new Element("XA", ConvertResource(), ConvertResource("B")),
-            new Element("XB", ConvertResource(), ConvertResource("R"))
+            new Element("AS", Helper.ConvertToResourceList("X", "B"), Helper.ConvertToResourceList("Y")),
+            new Element("GB", Helper.ConvertToResourceList("X", "Y", "D"), Helper.ConvertToResourceList("R")),
+            new Element("M5", Helper.ConvertToResourceList("B"), Helper.ConvertToResourceList("R")),
+            new Element("MR", Helper.ConvertToResourceList(), Helper.ConvertToResourceList("A","B")),
+            new Element("M2", Helper.ConvertToResourceList("B"), Helper.ConvertToResourceList("X")),
+            new Element("NN", Helper.ConvertToResourceList("R"), Helper.ConvertToResourceList("F")),
+            new Element("AFEF", Helper.ConvertToResourceList("A","B","X","Y","R"), Helper.ConvertToResourceList()),
+            new Element("XA", Helper.ConvertToResourceList(), Helper.ConvertToResourceList("B")),
+            new Element("XB", Helper.ConvertToResourceList(), Helper.ConvertToResourceList("R"))
         };
 
         [Test]
-        public static void AcceptanceTest()
+        public static void DMLParserAcceptanceTest()
         {
             Assert.AreEqual(acceptanceResult, new DMLParser().Parse(acceptanceStringInput));
         }
 
-
-
-        private static List<IResource> ConvertResource(params string[] input)
+        [Test]
+        public static void DML_ParseNull()
         {
-            var result = new List<IResource>();
-            for (var i = 0; i < input.Length; i++)
-            {
-                result.Add(new Resource(input[i]));
-            }
-            return result;
+            Assert.AreEqual(new List<IElement>(), new DMLParser().Parse(""));
+        }
+
+        private static string nameOnlyTest = "AX{}";
+        private static List<IElement> nameOnlyResult = new List<IElement>()
+        {
+            new Element("AX")
+        };
+        [Test]
+        public static void DML_ParseNameOnly()
+        {
+            Assert.AreEqual(nameOnlyResult, new DMLParser().Parse(nameOnlyTest));
+        }        
+        
+        private static string nameGiveTakeTest = System.IO.File.ReadAllText(@"D:\TobiTutorialC\TrainingFinal\TestResources\DML_NameGiveTakeTestInput1.txt");
+        private static List<IElement> nameGiveTakeResult = new List<IElement>()
+        {
+            new Element("GB", Helper.ConvertToResourceList("X", "Y", "D"), Helper.ConvertToResourceList("R"))
+        };
+        [Test]
+        public static void DML_ParseNameGiveTake()
+        {
+            Assert.AreEqual(nameGiveTakeResult, new DMLParser().Parse(nameGiveTakeTest));
         }
     }
 }
