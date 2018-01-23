@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,9 +26,9 @@ namespace TrainingFinal
 
             var parser = new StateParser();
             
-            var start = new State();//<- skip
+            var start = new State(); //<- skip
             // V name
-            var getName = new State();// <- name
+            var getName = new State(); // <- name
             // V skip
             var skippsAfterName = new State(); // <- skip
             // V CurlyBracketOpen
@@ -47,7 +48,7 @@ namespace TrainingFinal
     [TestFixture]
     class DMLParserTests
     {
-        private static string acceptanceStringInput = System.IO.File.ReadAllText(@"D:\TobiTutorialC\TrainingFinal\TestResources\DML_AcceptanceTestInput.txt");
+        private static string acceptanceStringInput = System.IO.File.ReadAllText(System.Reflection.Assembly.GetExecutingAssembly().Location + @"..\..\..\..\TestResources\DML_AcceptanceTestInput.txt");
         private static List<IElement> acceptanceResult = new List<IElement>()
         {
             new Element("AS", Helper.ConvertToResourceList("X", "B"), Helper.ConvertToResourceList("Y")),
@@ -82,9 +83,10 @@ namespace TrainingFinal
         public static void DML_ParseNameOnly()
         {
             Assert.AreEqual(nameOnlyResult, new DMLParser().Parse(nameOnlyTest));
-        }        
+        }
         
-        private static string nameGiveTakeTest = System.IO.File.ReadAllText(@"D:\TobiTutorialC\TrainingFinal\TestResources\DML_NameGiveTakeTestInput1.txt");
+        private static string filePath = System.Reflection.Assembly.GetExecutingAssembly().Location + @"..\..\..\..\TestResources\DML_NameGiveTakeTestInput1.txt";
+        private static string nameGiveTakeTest = System.IO.File.ReadAllText(DMLParserTests.filePath);
         private static List<IElement> nameGiveTakeResult = new List<IElement>()
         {
             new Element("GB", Helper.ConvertToResourceList("X", "Y", "D"), Helper.ConvertToResourceList("R"))

@@ -45,29 +45,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DMLParser.cs" />
-    <Compile Include="Element.cs" />
-    <Compile Include="Helper.cs" />
-    <Compile Include="IDMLParser.cs" />
-    <Compile Include="IElement.cs" />
+    <Compile Include="Parser\DMLParser.cs" />
+    <Compile Include="barebones\Element.cs" />
+    <Compile Include="util\Helper.cs" />
+    <Compile Include="Parser\IDMLParser.cs" />
+    <Compile Include="barebones\IElement.cs" />
     <Compile Include="ILoadingProcessor.cs" />
-    <Compile Include="ILoadingQuantityStrategy.cs" />
-    <Compile Include="ILoadingSelfProvideStrategy.cs" />
-    <Compile Include="ILoadingSequence.cs" />
-    <Compile Include="IRandomTreeGenerator.cs" />
-    <Compile Include="IResource.cs" />
-    <Compile Include="ISequenceVisualizer.cs" />
+    <Compile Include="Strategies\ILoadingQuantityStrategy.cs" />
+    <Compile Include="Strategies\ILoadingSelfProvideStrategy.cs" />
+    <Compile Include="barebones\ILoadingSequence.cs" />
+    <Compile Include="util\IRandomTreeGenerator.cs" />
+    <Compile Include="barebones\IResource.cs" />
+    <Compile Include="util\ISequenceVisualizer.cs" />
     <Compile Include="LoadingProcessor.cs" />
-    <Compile Include="LoadingSequence.cs" />
-    <Compile Include="LQS_Multi.cs" />
-    <Compile Include="LQS_Single.cs" />
-    <Compile Include="LSPS_Allowed.cs" />
-    <Compile Include="LSPS_Disallowed.cs" />
+    <Compile Include="barebones\LoadingSequence.cs" />
+    <Compile Include="Strategies\LQS_Multi.cs" />
+    <Compile Include="Strategies\LQS_Single.cs" />
+    <Compile Include="Strategies\LSPS_Allowed.cs" />
+    <Compile Include="Strategies\LSPS_Disallowed.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resource.cs" />
-    <Compile Include="SequenceVisualizer.cs" />
-    <Compile Include="Tokenizer\States.cs" />
+    <Compile Include="barebones\Resource.cs" />
+    <Compile Include="util\SequenceVisualizer.cs" />
+    <Compile Include="Parser\States.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

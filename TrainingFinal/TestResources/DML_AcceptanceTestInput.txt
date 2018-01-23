@@ -19,6 +19,7 @@ Gives(A,B);
 M2{
 Gives(X);
 Takes(B);}
+
 NN{Gives(F);Takes(R);}
 AFEF
 {

@@ -40,5 +40,14 @@ namespace TrainingFinal
                     this.Provisions.Equals(temp.Provisions)
                 );
         }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -1741313576;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<IResource>>.Default.GetHashCode(Requirements);
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<IResource>>.Default.GetHashCode(Provisions);
+            return hashCode;
+        }
     }
 }
