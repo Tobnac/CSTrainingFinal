@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TrainingFinal.Tokenizer;
 
 namespace TrainingFinal
 {
@@ -12,6 +13,32 @@ namespace TrainingFinal
         public List<IElement> Parse(string code)
         {
             var result = new List<IElement>();
+
+            bool isComma(string s) => s == ",";
+            bool isSkip(string s) => (s == "\n")||(s == " ")||(s == "/t");
+            bool isCurlyBracketOpen(string s) => s == "{";
+            bool isCurlyBracketClose(string s) => s == "}";
+            bool isBracketOpen(string s) => s == "(";
+            bool isBracketClose(string s) => s == ")";
+            bool isSymicolon(string s) => s == ";";
+
+
+            var parser = new StateParser();
+            
+            var start = new State();//<- skip
+            // V name
+            var getName = new State();// <- name
+            // V skip
+            var skippsAfterName = new State(); // <- skip
+            // V CurlyBracketOpen
+            var identifier = new State(); // <- skips
+            //
+            var take = new State();
+
+            var give = new State();
+
+
+
 
             return result;
         }
