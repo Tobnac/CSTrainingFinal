@@ -21,7 +21,7 @@ namespace TrainingFinal
             bool isCurlyBracketClose(string s) => s == "}";
             bool isBracketOpen(string s) => s == "(";
             bool isBracketClose(string s) => s == ")";
-            bool isSymicolon(string s) => s == ";";
+            bool isSemicolon(string s) => s == ";";
 
 
             var parser = new StateParser();

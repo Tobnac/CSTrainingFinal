@@ -40,7 +40,22 @@ namespace TrainingFinal
             // PARAM -> string | string , PARAM
 
             // 4. determine order of elements to load/activate using strategy for quantity + selfSupply
-
+            // var allElements
+            //  V filterLoadable():
+            //  V var loadedRecourses (modifyed by LoadingSelfProvideStrategys)
+            //  V if all Requirements are in loadedRecourses => add element in:
+            // var canBeLoaded
+            //  V LoadingQuantityStrategy-elements are loaded
+            // var currentStepElements
+            //  V currentStepElements are saved in haveBeenLoaded
+            // var haveBeenLoaded
+            // repeat until allElements or canBeLoaded is empty
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
             // 5. visualize result-order
 
 

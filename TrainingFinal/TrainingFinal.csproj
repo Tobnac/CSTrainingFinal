@@ -59,10 +59,10 @@
     <Compile Include="util\ISequenceVisualizer.cs" />
     <Compile Include="LoadingProcessor.cs" />
     <Compile Include="barebones\LoadingSequence.cs" />
-    <Compile Include="Strategies\LQS_Multi.cs" />
-    <Compile Include="Strategies\LQS_Single.cs" />
-    <Compile Include="Strategies\LSPS_Allowed.cs" />
-    <Compile Include="Strategies\LSPS_Disallowed.cs" />
+    <Compile Include="Strategies\LoadingQuantityStrategy_Multi.cs" />
+    <Compile Include="Strategies\LoadingQuantityStrategy_Single.cs" />
+    <Compile Include="Strategies\LoadingSelfProvideStrategy_Allowed.cs" />
+    <Compile Include="Strategies\LoadingSelfProvideStrategy_Disallowed.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="barebones\Resource.cs" />

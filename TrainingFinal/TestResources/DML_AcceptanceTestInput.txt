@@ -34,9 +34,3 @@ XB
 {
 Gives(R);
 }
-
-AS
-{
-Gives();
-Takes();
-}
