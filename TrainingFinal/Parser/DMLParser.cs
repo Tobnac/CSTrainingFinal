@@ -11,9 +11,17 @@ namespace TrainingFinal
 {
     class DMLParser : IDMLParser
     {
-        public List<IElement> Parse(string code)
+        public List<string> Parse(string code)
         {
-            var result = new List<IElement>();
+            var result = new List<string>();
+
+
+
+
+
+
+
+
 
             bool isComma(string s) => s == ",";
             bool isSkip(string s) => (s == "\n")||(s == " ")||(s == "/t");

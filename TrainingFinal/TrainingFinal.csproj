@@ -47,6 +47,8 @@
   <ItemGroup>
     <Compile Include="Parser\DMLParser.cs" />
     <Compile Include="barebones\Element.cs" />
+    <Compile Include="Tokenizer\TESTFIXTUREAttribute.cs" />
+    <Compile Include="Tokenizer\Tokenizer.cs" />
     <Compile Include="util\Helper.cs" />
     <Compile Include="Parser\IDMLParser.cs" />
     <Compile Include="barebones\IElement.cs" />
@@ -74,6 +76,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="TestResources\DML_AcceptanceTestInput - Copy.txt" />
     <Content Include="TestResources\DML_AcceptanceTestInput.txt" />
     <Content Include="TestResources\DML_NameGiveTakeTestInput1.txt" />
   </ItemGroup>

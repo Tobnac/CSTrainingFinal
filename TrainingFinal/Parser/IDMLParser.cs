@@ -8,6 +8,6 @@ namespace TrainingFinal
 {
     interface IDMLParser
     {
-        List<IElement> Parse(string code);
+        List<string> Parse(string code);
     }
 }
