@@ -22,13 +22,10 @@ namespace TrainingFinal
 
             // 1. read input file into string -> string
 
-
             // 2. parse+sanitise string into strongList -> List<string>
             // 2.1 write stateParser itself
             // 2.2 define states + rules: skip whitespaces/enter/tab, list 'keywords': ( ) { } ;
             // 2.3 create stringList (+ insert word into each)
-
-
 
             // 3. evaluate strings into elements -> ElementName, syntax (braces, semicolons), resourceName, identifier(gives/takes) -> List<IElement>
             // 3.1 use stateParser from 2.3

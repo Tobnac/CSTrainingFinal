@@ -5,49 +5,143 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TrainingFinal.Tokenizer;
 
 namespace TrainingFinal
 {
     class DMLParser : IDMLParser
     {
-        public List<string> Parse(string code)
+        public List<IElement> Parse(List<string> tokenList)
         {
-            var result = new List<string>();
+            var result = new List<IElement>();
+            var keySymbols = new string[] { ",", ";", "(", ")", "{", "}" };
 
+            // element creation
+            IElement currentEle = new Element();
+            string currentTarget = ""; // "Gives" or "Takes"
+            void newEle(string s) => currentEle = new Element(s);
+            void addReq(string s)
+            {
+                if (currentTarget == "Gives")
+                {
+                    if (!currentEle.Provisions.Contains(new Resource(s)))
+                    {
+                        currentEle.Provisions.Add(new Resource(s));
+                    }
+                }
+                else if (currentTarget == "Takes")
+                {
+                    if (!currentEle.Requirements.Contains(new Resource(s)))
+                    {
+                        currentEle.Requirements.Add(new Resource(s));
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Error, unknown target");
+                }
+            }
+            void setTarget(string s) => currentTarget = s;
+            void saveEle(string s) => result.Add(currentEle);
 
+            // validate functions
+            bool isWord(string s) => !keySymbols.Contains(s);
+            bool isIdent(string s) => s == "Gives" || s == "Takes";
+            Func<string, bool> isChar(string target) => new Func<string, bool>(input => input == target);
 
-
-
-
-
-
-
-            bool isComma(string s) => s == ",";
-            bool isSkip(string s) => (s == "\n")||(s == " ")||(s == "/t");
-            bool isCurlyBracketOpen(string s) => s == "{";
-            bool isCurlyBracketClose(string s) => s == "}";
-            bool isBracketOpen(string s) => s == "(";
-            bool isBracketClose(string s) => s == ")";
-            bool isSemicolon(string s) => s == ";";
-
-
+            // parser + states
             var parser = new StateParser();
-            
-            var start = new State(); //<- skip
-            // V name
-            var getName = new State(); // <- name
-            // V skip
-            var skippsAfterName = new State(); // <- skip
-            // V CurlyBracketOpen
-            var identifier = new State(); // <- skips
-            //
-            var take = new State();
+            var eleOpenBraceExp = new State();
+            var eleRoot = new State();
+            var root = new State();
+            var paramStart = new State();
+            var firstParam = new State();
+            var param = new State();
+            var paramComma = new State();
+            var paramClose = new State();
+            var expSemicolon = new State();
+            var afterParam = new State();
 
-            var give = new State();
+            // adding rules
+            root.Rules.Add(new StateRule()
+            {
+                Validate = isWord,
+                TransitionState = eleOpenBraceExp,
+                StringAction = newEle
+            });
 
+            eleOpenBraceExp.Rules.Add(new StateRule()
+            {
+                Validate = isChar("{"),
+                TransitionState = eleRoot,
+                StringAction = null
+            });
 
+            eleRoot.Rules.Add(new StateRule()
+            {
+                Validate = isIdent,
+                TransitionState = paramStart,
+                StringAction = setTarget
+            });
 
+            eleRoot.Rules.Add(new StateRule()
+            {
+                Validate = isChar("}"),
+                TransitionState = root,
+                StringAction = saveEle
+            });
+
+            paramStart.Rules.Add(new StateRule()
+            {
+                Validate = isChar("("),
+                TransitionState = firstParam,
+                StringAction = null
+            });
+
+            firstParam.Rules.Add(new StateRule()
+            {
+                Validate = isChar(")"),
+                TransitionState = expSemicolon,
+                StringAction = null
+            });
+
+            firstParam.Rules.Add(new StateRule()
+            {
+                Validate = isWord,
+                TransitionState = afterParam,
+                StringAction = addReq
+            });
+
+            afterParam.Rules.Add(new StateRule()
+            {
+                Validate = isChar(","),
+                TransitionState = param,
+                StringAction = null
+            });
+
+            afterParam.Rules.Add(new StateRule()
+            {
+                Validate = isChar(")"),
+                TransitionState = expSemicolon,
+                StringAction = null
+            });
+
+            param.Rules.Add(new StateRule()
+            {
+                Validate = isWord,
+                TransitionState = afterParam,
+                StringAction = addReq
+            });
+
+            expSemicolon.Rules.Add(new StateRule()
+            {
+                Validate = isChar(";"),
+                TransitionState = eleRoot,
+                StringAction = null
+            });
+
+            parser.SetState(root);
+
+            tokenList.ForEach(x => parser.Parse(x));
 
             return result;
         }
@@ -73,13 +167,15 @@ namespace TrainingFinal
         [Test]
         public static void DMLParserAcceptanceTest()
         {
-            Assert.AreEqual(acceptanceResult, new DMLParser().Parse(acceptanceStringInput));
+            var input = new DMLParser().Parse(new Tokenizer().Tokenize(acceptanceStringInput));
+            Assert.AreEqual(acceptanceResult, input);
         }
 
         [Test]
         public static void DML_ParseNull()
         {
-            Assert.AreEqual(new List<IElement>(), new DMLParser().Parse(""));
+            var input = new DMLParser().Parse(new Tokenizer().Tokenize(""));
+            Assert.AreEqual(new List<IElement>(), input);
         }
 
         private static string nameOnlyTest = "AX{}";
@@ -90,7 +186,8 @@ namespace TrainingFinal
         [Test]
         public static void DML_ParseNameOnly()
         {
-            Assert.AreEqual(nameOnlyResult, new DMLParser().Parse(nameOnlyTest));
+            var input = new DMLParser().Parse(new Tokenizer().Tokenize(nameOnlyTest));
+            Assert.AreEqual(nameOnlyResult, input);
         }
         
         private static string filePath = System.Reflection.Assembly.GetExecutingAssembly().Location + @"..\..\..\..\TestResources\DML_NameGiveTakeTestInput1.txt";
@@ -102,7 +199,8 @@ namespace TrainingFinal
         [Test]
         public static void DML_ParseNameGiveTake()
         {
-            Assert.AreEqual(nameGiveTakeResult, new DMLParser().Parse(nameGiveTakeTest));
+            var input = new DMLParser().Parse(new Tokenizer().Tokenize(nameGiveTakeTest));
+            Assert.AreEqual(nameGiveTakeResult, input);
         }
     }
 }

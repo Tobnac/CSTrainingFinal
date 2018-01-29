@@ -5,20 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TrainingFinal.Tokenizer
+namespace TrainingFinal
 {
     public class Tokenizer
     {
-
-
-
         // 2. parse+sanitise string into strongList -> List<string>
         // 2.1 write stateParser itself
         // 2.2 define states + rules: skip whitespaces/enter/tab, list 'keywords': ( ) { } , ;
         // 2.3 create stringList (+ insert word into each)
-
-
-
 
         public List<string> Tokenize(string code)
         {
@@ -29,7 +23,30 @@ namespace TrainingFinal.Tokenizer
 
         private List<string> PerformSplit(string whiteSpaceRemovedCode)
         {
-            throw new NotImplementedException();
+            var result = new List<string>();
+            var buffer = "";
+            var splitChars = new char[] { ',', ';', '(', ')', '{', '}' };
+
+            foreach (var c in whiteSpaceRemovedCode)
+            {
+                if (splitChars.Contains(c))
+                {
+                    if (buffer != "")
+                    {
+                        result.Add(buffer);
+                    }
+                    
+                    buffer = "";
+                    result.Add(c.ToString());
+                }
+
+                else
+                {
+                    buffer += c;
+                }
+            }
+
+            return result;
         }
 
         public static string RemoveWhiteSpaces(string whiteString)
@@ -58,7 +75,6 @@ namespace TrainingFinal.Tokenizer
             "AFEF","{","Takes","(","A",",","B",")",";","Takes","(","A",",","X",",","Y",",","R",")",";","}",
             "XA","{","Gives","(","B",")",";","}",
             "XB","{","Gives","(","R",")",";","}"
-
         };
 
         [Test]

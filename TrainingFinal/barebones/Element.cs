@@ -9,8 +9,8 @@ namespace TrainingFinal
     class Element : IElement
     {
         public string Name { get; set; }
-        public List<IResource> Requirements { get; set; }
-        public List<IResource> Provisions { get; set; }
+        public List<IResource> Requirements { get; set; } = new List<IResource>();
+        public List<IResource> Provisions { get; set; } = new List<IResource>();
 
         public Element()
         {
@@ -33,12 +33,21 @@ namespace TrainingFinal
         {
             if (!(obj is Element)) return false;
             var temp = obj as Element;
-            return
-                (
-                    this.Name.Equals(temp.Name) &&
-                    this.Requirements.Equals(temp.Requirements) &&
-                    this.Provisions.Equals(temp.Provisions)
-                );
+
+            if (this.Name != temp.Name) return false;
+            if (this.Requirements.Count != temp.Requirements.Count) return false;
+            if (this.Provisions.Count != temp.Provisions.Count) return false;
+
+            for (var i = 0; i < this.Requirements.Count; i++)
+            {
+                if (!this.Requirements[i].Equals(temp.Requirements[i])) return false;
+            }
+            for (var i = 0; i < this.Provisions.Count; i++)
+            {
+                if (!this.Provisions[i].Equals(temp.Provisions[i])) return false;
+            }
+
+            return true;
         }
 
         public override int GetHashCode()
