@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrainingFinal
 {
-    interface IElement
+    public interface IElement
     {
         string Name { get; set; }
         // list of resources that this Element required to be loaded (and thus provide it's own resources)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrainingFinal
 {
-    interface IRandomTreeGenerator
+    public interface IRandomTreeGenerator
     {
         List<IElement> GenerateTree(int nodeCount, int dependancyCount, float averageDependancyCount);
     }

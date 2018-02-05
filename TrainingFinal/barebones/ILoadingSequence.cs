@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrainingFinal
 {
-    interface ILoadingSequence
+    public interface ILoadingSequence
     {
         // first index = loaded first, ...
         // every index can load multiple elements simultaniously

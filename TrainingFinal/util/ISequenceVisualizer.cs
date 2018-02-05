@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrainingFinal
 {
-    interface ISequenceVisualizer
+    public interface ISequenceVisualizer
     {
         // prints the order + elements into the console
         // (which element first, maybe info about this element, ...)
