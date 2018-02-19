@@ -42,6 +42,7 @@ namespace TrainingFinal
             {
                 if (!this.Requirements[i].Equals(temp.Requirements[i])) return false;
             }
+
             for (var i = 0; i < this.Provisions.Count; i++)
             {
                 if (!this.Provisions[i].Equals(temp.Provisions[i])) return false;

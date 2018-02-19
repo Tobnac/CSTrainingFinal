@@ -20,5 +20,10 @@ namespace TrainingFinal
             if (!(obj is Resource)) return false;
             return (obj as Resource).ResourceName == this.ResourceName;
         }
+
+        public override int GetHashCode()
+        {
+            return -1225225530 + EqualityComparer<string>.Default.GetHashCode(this.ResourceName);
+        }
     }
 }

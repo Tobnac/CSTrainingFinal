@@ -8,8 +8,9 @@ namespace TrainingFinal
 {
     public interface ILoadingSelfProvideStrategy
     {
-        // evaluated if the specified element can be loaded with the currently availabel resources.
-        // Depending on the selected strategy, an element can use its own provision-resources to load itself or not.
-        bool CanBeLoaded(IElement element, List<IResource> availableResources);
+        // based on SelfProvideStrat:
+        // - add the resources the current element provides to the currently available resources
+        // - or not 
+        List<IResource> ExpandAvailableResources(List<IResource> availableResoucres, IElement element);
     }
 }

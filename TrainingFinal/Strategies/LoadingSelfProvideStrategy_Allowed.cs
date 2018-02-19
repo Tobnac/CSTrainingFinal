@@ -8,9 +8,10 @@ namespace TrainingFinal
 {
     class LSPS_Allowed : ILoadingSelfProvideStrategy
     {
-        public bool CanBeLoaded(IElement element, List<IResource> availableResources)
+        public List<IResource> ExpandAvailableResources(List<IResource> availableResoucres, IElement element)
         {
-            throw new NotImplementedException();
+            element.Provisions.ForEach(x => availableResoucres.Add(x));
+            return availableResoucres;
         }
     }
 }

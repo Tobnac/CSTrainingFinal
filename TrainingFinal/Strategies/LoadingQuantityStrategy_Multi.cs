@@ -8,12 +8,10 @@ namespace TrainingFinal
 {
     class LQS_Multi : ILoadingQuantityStrategy
     {
-        public ILoadingSelfProvideStrategy SelfProvideStrategy { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public List<IElement> ElementList { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public ILoadingSequence ResolveLoadingSequence(List<IElement> elements)
+        public List<IElement> ResolveLoadingSequence(List<IElement> elements, ILoadingSequence resultSequence)
         {
-            throw new NotImplementedException();
+            resultSequence.AddLoadingStep(elements);
+            return elements;
         }
     }
 }

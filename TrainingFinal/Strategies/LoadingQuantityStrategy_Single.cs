@@ -9,65 +9,12 @@ namespace TrainingFinal
 {
     class LQS_Single : ILoadingQuantityStrategy
     {
-        public ILoadingSelfProvideStrategy SelfProvideStrategy { get; set; }
-        public List<IElement> ElementList { get; set; }
-
-        private List<IResource> availabelResources = new List<IResource>();
-
-        public ILoadingSequence ResolveLoadingSequence(List<IElement> elements)
+        public List<IElement> ResolveLoadingSequence(List<IElement> elements, ILoadingSequence resultSequence)
         {
-            var result = new LoadingSequence();
-            var didNothing = true;
-
-            while (elements.Count > 0)
-            {
-                foreach (var element in elements)
-                {
-                    if (this.SelfProvideStrategy.CanBeLoaded(element, availabelResources))
-                    {
-                        result.AddLoadingStep(element);
-                        elements.Remove(element);
-                        didNothing = false;
-                        break;
-                    }
-                }
-
-                // none of the remaining elements could be loaded
-                // the specified element cannot fully be loaded
-                if (didNothing)
-                {
-                    Console.WriteLine("Specified elements could not be fully loaded with the selected configuration.");
-                    break;
-                }
-            }
-
-            return result;
+            var ele = elements.First();
+            resultSequence.AddLoadingStep(ele);
+            return new List<IElement>() { ele };
         }
     }
 
-    [TestFixture]
-    class LQS_Single_Tests
-    {
-        private static LQS_Single tester = new LQS_Single()
-        {
-            SelfProvideStrategy = new LSPS_Disallowed()
-        };
-
-        [Test]
-        public static void AcceeptanceTest_LQSS()
-        {
-            //var input = new List<IElement>()
-            //{
-            //    new Element("A", Helper.ConvertToResourceList(), Helper.ConvertToResourceList("A")),
-            //    new Element("A", Helper.ConvertToResourceList("A"), Helper.ConvertToResourceList())
-            //};
-
-            //var expection = new LoadingSequence();
-            //expection.AddLoadingStep(input[0]);
-            //expection.AddLoadingStep(input[1]);
-
-            //Assert.Equals(expection, tester.ResolveLoadingSequence(input));
-        }
-
-    }
 }

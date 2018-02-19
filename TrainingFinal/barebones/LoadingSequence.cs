@@ -31,5 +31,38 @@ namespace TrainingFinal
         {
             this.AddLoadingStep(new List<IElement>() { element });
         }
+
+        public override bool Equals(object obj)
+        {
+            var temp = obj as LoadingSequence;
+
+            if (this.Sequence.Count != temp.Sequence.Count) return false;
+
+            for (int i = 0; i < this.Sequence.Count; i++)
+            {
+                if (this.Sequence[i].Count != temp.Sequence[i].Count) return false;
+
+                for (int j = 0; j < this.Sequence[i].Count; j++)
+                {
+                    if (this.Sequence[i][j].Equals(temp.Sequence[i][j]) == false)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            var b = this.NotLoadedElements.SequenceEqual(temp.NotLoadedElements);
+            return b;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }
