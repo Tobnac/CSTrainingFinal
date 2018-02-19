@@ -50,8 +50,12 @@ namespace TrainingFinal
 
             // add their resources to the availables ones
             var loaded = this.QuantityStrategy.ResolveLoadingSequence(loadableElements, resultSequence);
-            loaded.ForEach(x => this.availableResoucres.AddRange(x.Provisions));
-            loaded.ForEach(x => unloadedElements.Remove(x));
+
+            foreach (var ele in loaded)
+            {
+                this.availableResoucres.AddRange(ele.Provisions);
+                unloadedElements.Remove(ele);
+            }
         }
 
         private List<IElement> GetLoadableElements(List<IElement> unloadedElements)

@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoDictionary.cs" />
     <Compile Include="barebones\Element.cs" />
     <Compile Include="Parser\DMLParser.cs" />
     <Compile Include="Tokenizer\Tokenizer.cs" />

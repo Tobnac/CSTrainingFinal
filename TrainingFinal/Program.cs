@@ -10,6 +10,28 @@ namespace TrainingFinal
     {
         static void Main(string[] args)
         {
+            //var dic = new AutoDictionary<string>();
+
+            //dic.Register("Tom");
+            //dic.Register("Hans");
+            //dic.Register("JJ (aka. Aidsvieh)");
+
+            //bool b = dic["Tom"] == 0;
+
+            //int x = 5;
+
+            //Console.WriteLine(x++); // prints 5. increase x to 6
+            //Console.WriteLine(++x); // increase x to 7, prints 7
+
+
+
+
+
+
+
+
+
+
             // file
             // input: code string
             // lexer -> transform long code string into many single tokens for each word/symbol + trim spaces, enter, tab
